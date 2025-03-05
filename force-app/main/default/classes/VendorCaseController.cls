@@ -9,7 +9,7 @@ public with sharing class VendorCaseController {
         ];
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=false)
     public static List<Case_Item__c> getCaseItems(String caseId) {
         return [
             SELECT Id, Product__r.Id, Product__r.Name, Quantity__c
