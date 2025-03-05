@@ -18,9 +18,7 @@ public class VendorCalloutBatch implements Database.Batchable<sObject>, Database
                 WHERE DeveloperName = 'VendorCallout'
                 LIMIT 1
             ];
-            system.debug('here01' + settings);
         } catch (Exception e) {
-            system.debug('here02');
             System.debug(
                 'Unable to find "VendorCallout" Vendor_API_Settings__mdt record: ' +
                 e.getMessage()
@@ -114,13 +112,12 @@ public class VendorCalloutBatch implements Database.Batchable<sObject>, Database
                             res.getStatus()
                     );
                 }
-                system.debug('here1');
                 logsToInsert.add(log);
             } catch (Exception e) {
                 System.debug(
                     'Callout error for Case ' + c.Id + ': ' + e.getMessage()
                 );
-                system.debug('here2');
+
                 logsToInsert.add(
                     new Vendor_Callout_Log__c(
                         Case__c = c.Id,
