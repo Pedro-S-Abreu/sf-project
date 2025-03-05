@@ -138,14 +138,14 @@ export default class VendorCaseManager extends LightningElement {
 
         getDefaultPricebookEntry()
             .then((pricebookEntry) => {
-                this.modalProductId = pricebookEntry.Product2Id; // Default to KIT_TSTSKU01 Product2Id
+                this.modalProductId = pricebookEntry.Product2Id;
             })
             .catch((error) => {
                 this.showErrorToast(
                     "Error loading default product",
                     error.body?.message
                 );
-                this.modalProductId = null; // Fallback to no default if fetch fails
+                this.modalProductId = null;
             });
 
         this.showModal = true;
@@ -248,7 +248,6 @@ export default class VendorCaseManager extends LightningElement {
         fields[CASE_STATUS.fieldApiName] = "Submit to Vendor";
         updateRecord({ fields })
             .then(() => {
-                // Set a 30-second timeout if no CDC event is received
                 setTimeout(() => {
                     if (this.isProcessing) {
                         this.showErrorToast(
@@ -258,7 +257,6 @@ export default class VendorCaseManager extends LightningElement {
                         this.isProcessing = false;
                     }
                 }, 30000);
-                // CDC subscription will handle the rest
             })
             .catch((error) => {
                 this.showErrorToast(
