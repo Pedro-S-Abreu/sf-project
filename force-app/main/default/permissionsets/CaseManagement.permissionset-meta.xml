@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Case Management</label>
+    <description
+    >Permissions for Case Management app, including Vendor Case Manager functionality</description>
+
+    <!-- Apex Class Access -->
+    <classAccesses>
+        <apexClass>VendorCalloutBatch</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VendorCaseController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+
+    <!-- Application Visibility -->
+    <applicationVisibilities>
+        <application>CaseManagement</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+
+    <!-- Tab Visibility
+    <tabSettings>
+        <tab>VendorCaseManager</tab>
+        <visibility>DefaultOn</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>standard-Case</tab>
+        <visibility>DefaultOn</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>standard-Order</tab>
+        <visibility>DefaultOn</visibility>
+    </tabSettings> -->
+
+    <!-- Object Permissions -->
+    <objectPermissions>
+        <object>Case</object>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Case_Item__c</object>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Vendor_API_Settings__mdt</object>
+        <allowRead>true</allowRead>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Vendor_Callout_Log__c</object>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Order</object>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <object>OrderItem</object>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Pricebook2</object>
+        <allowRead>true</allowRead>
+    </objectPermissions>
+    <objectPermissions>
+        <object>PricebookEntry</object>
+        <allowRead>true</allowRead>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Product2</object>
+        <allowRead>true</allowRead>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Account</object>
+        <allowRead>true</allowRead>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Contact</object>
+        <allowRead>true</allowRead>
+    </objectPermissions>
+
+    <!-- Field Permissions -->
+    <fieldPermissions>
+        <field>Case_Item__c.Product__c</field>
+        <editable>true</editable>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Vendor_API_Settings__mdt.Endpoint_URL__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Vendor_API_Settings__mdt.Bearer_Token__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <fieldPermissions>
+        <field>Vendor_Callout_Log__c.Case__c</field>
+        <editable>true</editable>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Vendor_Callout_Log__c.Is_Successful__c</field>
+        <editable>true</editable>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Vendor_Callout_Log__c.Order__c</field>
+        <editable>true</editable>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Vendor_Callout_Log__c.Request__c</field>
+        <editable>true</editable>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Vendor_Callout_Log__c.Response__c</field>
+        <editable>true</editable>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Case.Status</field>
+        <editable>true</editable>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Order.AccountId</field>
+        <editable>true</editable>
+        <readable>true</readable>
+    </fieldPermissions>
+</PermissionSet>

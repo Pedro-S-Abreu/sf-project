@@ -1,0 +1,15 @@
+{
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "default": true
+        }
+    ],
+    "name": "NaverisCallout",
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "62.0",
+    "changeDataCapture": {
+        "entities": ["Vendor_Callout_Log__c"]
+    }
+}

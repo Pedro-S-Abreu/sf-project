@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product__c</fullName>
+    <description>Related Product from the Pricebook</description>
+    <externalId>false</externalId>
+    <label>Product Code</label>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>Case Items</relationshipLabel>
+    <relationshipName>Case_Items</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

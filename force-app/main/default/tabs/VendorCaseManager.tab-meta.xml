@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customObject>false</customObject>
+    <label>Vendor Case Manager</label>
+    <motif>Custom22: Box</motif>
+    <description>Tab for managing vendor cases</description>
+    <lwcComponent>vendorCaseManager</lwcComponent>
+</CustomTab>

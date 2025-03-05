@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order__c</fullName>
+    <description>Related Order created from the API response</description>
+    <externalId>false</externalId>
+    <label>Order</label>
+    <referenceTo>Order</referenceTo>
+    <relationshipLabel>Callout Logs</relationshipLabel>
+    <relationshipName>Callout_Logs</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

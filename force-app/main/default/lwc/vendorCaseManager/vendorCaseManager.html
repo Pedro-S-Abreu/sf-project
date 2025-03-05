@@ -1,0 +1,117 @@
+<template>
+    <lightning-card title="Vendor Case Manager" icon-name="standard:case">
+        <!-- Case Selection -->
+        <div class="slds-m-around_medium">
+            <lightning-record-picker
+                label="Select a Case"
+                placeholder="Search Cases..."
+                object-api-name="Case"
+                field-api-name="CaseNumber"
+                value={selectedCaseId}
+                onchange={handleCaseChange}
+                disabled={isProcessing}
+            ></lightning-record-picker>
+        </div>
+
+        <!-- Case Items Table -->
+        <template if:true={selectedCaseId}>
+            <lightning-card title="Case Items" icon-name="standard:product">
+                <div class="slds-p-around_medium">
+                    <lightning-datatable
+                        key-field="id"
+                        data={caseItems}
+                        columns={itemColumns}
+                        onrowaction={handleRowAction}
+                        hide-checkbox-column
+                        min-column-width="100"
+                        style="min-width: 300px"
+                    ></lightning-datatable>
+                    <div class="slds-m-top_medium slds-align_absolute-center">
+                        <lightning-button
+                            label="Add Item"
+                            variant="neutral"
+                            onclick={openAddItemModal}
+                            class="slds-m-right_small"
+                            disabled={isProcessing}
+                        ></lightning-button>
+                        <lightning-button
+                            label="Submit"
+                            variant="brand"
+                            onclick={handleSubmit}
+                            disabled={isProcessing}
+                        ></lightning-button>
+                    </div>
+                </div>
+            </lightning-card>
+        </template>
+
+        <!-- Item Modal (for Add/Edit) -->
+        <template if:true={showModal}>
+            <section role="dialog" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button
+                            class="slds-button slds-modal__close"
+                            title="Close"
+                            onclick={closeModal}
+                            disabled={isProcessing}
+                        >
+                            <lightning-icon
+                                icon-name="utility:close"
+                                size="small"
+                            ></lightning-icon>
+                        </button>
+                        <h2 class="slds-modal__title">{modalTitle}</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-record-picker
+                            label="Select Product"
+                            placeholder="Search Products..."
+                            object-api-name="Product2"
+                            field-api-name="Name"
+                            value={modalProductId}
+                            onchange={handleProductChange}
+                            disabled={isProductLocked}
+                        ></lightning-record-picker>
+                        <lightning-input
+                            type="number"
+                            label="Quantity"
+                            value={modalQuantity}
+                            onchange={handleQuantityChange}
+                            min="1"
+                            class="slds-m-top_small"
+                            disabled={isProcessing}
+                        ></lightning-input>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button
+                            label="Cancel"
+                            variant="neutral"
+                            onclick={closeModal}
+                            disabled={isProcessing}
+                        ></lightning-button>
+                        <lightning-button
+                            label="Save"
+                            variant="brand"
+                            onclick={saveItem}
+                            disabled={isSaveDisabled}
+                        ></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner
+                alternative-text="Loading..."
+            ></lightning-spinner>
+        </template>
+
+        <!-- Toast Messages -->
+        <template if:true={showToast}>
+            <lightning-messages></lightning-messages>
+        </template>
+    </lightning-card>
+</template>
