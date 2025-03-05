@@ -1,5 +1,5 @@
 public with sharing class VendorCaseController {
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Case> getCases() {
         return [
             SELECT Id, CaseNumber, Subject
@@ -9,7 +9,7 @@ public with sharing class VendorCaseController {
         ];
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Case_Item__c> getCaseItems(String caseId) {
         return [
             SELECT Id, Product__r.Id, Product__r.Name, Quantity__c
@@ -18,7 +18,7 @@ public with sharing class VendorCaseController {
         ];
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static PricebookEntry getDefaultPricebookEntry() {
         return [
             SELECT Id, Product2Id, ProductCode, Product2.Name
