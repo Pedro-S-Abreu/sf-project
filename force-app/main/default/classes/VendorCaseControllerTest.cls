@@ -2,7 +2,6 @@
 private class VendorCaseControllerTest {
     @TestSetup
     static void setup() {
-        // Create test data
         Account acc = new Account(
             Name = 'Test Business Inc.',
             BillingStreet = '123 Test St',

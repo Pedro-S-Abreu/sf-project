@@ -105,7 +105,7 @@ public class VendorCalloutBatch implements Database.Batchable<sObject>, Database
                         OrderReferenceNumber = orderId
                     );
                     ordersToInsert.add(ord);
-                    log.Order__c = ord.Id; // Will be set after insert
+                    log.Order__c = ord.Id;
                 } else {
                     System.debug(
                         'Callout failed for Case ' +
@@ -191,15 +191,14 @@ public class VendorCalloutBatch implements Database.Batchable<sObject>, Database
                 }
             } catch (Exception e) {
                 System.debug('Commit error: ' + e.getMessage());
-                System.debug('Exception Type: ' + e.getTypeName()); // Type of the exception
-                System.debug('Stack Trace: ' + e.getStackTraceString()); // Stack trace information
+                System.debug('Exception Type: ' + e.getTypeName());
+                System.debug('Stack Trace: ' + e.getStackTraceString());
                 System.debug(
                     'Line Number: ' + e.getStackTraceString().split(':')[0]
                 );
             }
         }
 
-        // Insert Logs
         if (!logsToInsert.isEmpty()) {
             insert logsToInsert;
         }
@@ -226,7 +225,6 @@ public class VendorCalloutBatch implements Database.Batchable<sObject>, Database
         public List<Item> Items;
 
         public VendorRequestBody(Case c, List<Case_Item__c> caseItems) {
-            // Query Case with Contact and Account details
             Case queriedCase = [
                 SELECT
                     Id,

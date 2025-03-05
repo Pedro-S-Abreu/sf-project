@@ -22,10 +22,6 @@ private class VendorCalloutBatchTest {
 
     @TestSetup
     static void setup() {
-        // Use Test.getStandardPricebookId() to get the standard Pricebook ID
-        Id stdPricebookId = Test.getStandardPricebookId();
-
-        // Create a Business Account
         Id businessAccountRTId;
         try {
             businessAccountRTId = [
@@ -75,7 +71,7 @@ private class VendorCalloutBatchTest {
         );
         insert prod;
 
-        // Use the standard Pricebook ID directly
+        Id stdPricebookId = Test.getStandardPricebookId();
         PricebookEntry pbe = new PricebookEntry(
             Product2Id = prod.Id,
             Pricebook2Id = stdPricebookId,
