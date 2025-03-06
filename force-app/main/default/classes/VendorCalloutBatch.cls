@@ -222,6 +222,7 @@ public class VendorCalloutBatch implements Database.Batchable<sObject>, Database
         public List<Item> Items;
 
         public VendorRequestBody(Case c, List<Case_Item__c> caseItems) {
+            // Query additional fields to handle Person Accounts
             Case queriedCase = [
                 SELECT
                     Id,
@@ -233,7 +234,11 @@ public class VendorCalloutBatch implements Database.Batchable<sObject>, Database
                     Account.BillingState,
                     Account.BillingPostalCode,
                     Account.BillingCountry,
-                    Account.Name
+                    Account.Name,
+                    Account.IsPersonAccount,
+                    Account.FirstName,
+                    Account.LastName,
+                    Account.Phone
                 FROM Case
                 WHERE Id = :c.Id
                 LIMIT 1
@@ -241,19 +246,36 @@ public class VendorCalloutBatch implements Database.Batchable<sObject>, Database
 
             this.Address = new Address();
 
-            if (queriedCase.Contact != null) {
-                this.Address.FirstName = queriedCase.Contact.FirstName;
-                this.Address.LastName = queriedCase.Contact.LastName;
-                this.Address.Phone = queriedCase.Contact.Phone;
-            }
-
-            if (queriedCase.Account != null) {
+            // Handle Person Accounts vs Regular Accounts
+            if (
+                queriedCase.Account != null &&
+                queriedCase.Account.IsPersonAccount
+            ) {
+                // Person Account: Use Account fields directly
+                this.Address.FirstName = queriedCase.Account.FirstName;
+                this.Address.LastName = queriedCase.Account.LastName;
+                this.Address.Phone = queriedCase.Account.Phone;
                 this.Address.Street = queriedCase.Account.BillingStreet;
                 this.Address.City = queriedCase.Account.BillingCity;
                 this.Address.State = queriedCase.Account.BillingState;
                 this.Address.PostalCode = queriedCase.Account.BillingPostalCode;
                 this.Address.Country = queriedCase.Account.BillingCountry;
                 this.Address.CompanyName = queriedCase.Account.Name;
+            } else {
+                // Regular Account: Use Contact for personal info, Account for billing
+                if (queriedCase.Contact != null) {
+                    this.Address.FirstName = queriedCase.Contact.FirstName;
+                    this.Address.LastName = queriedCase.Contact.LastName;
+                    this.Address.Phone = queriedCase.Contact.Phone;
+                }
+                if (queriedCase.Account != null) {
+                    this.Address.Street = queriedCase.Account.BillingStreet;
+                    this.Address.City = queriedCase.Account.BillingCity;
+                    this.Address.State = queriedCase.Account.BillingState;
+                    this.Address.PostalCode = queriedCase.Account.BillingPostalCode;
+                    this.Address.Country = queriedCase.Account.BillingCountry;
+                    this.Address.CompanyName = queriedCase.Account.Name;
+                }
             }
 
             this.Items = new List<Item>();
